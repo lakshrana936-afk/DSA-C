@@ -24,9 +24,12 @@ void display_right_to_left();
 void display();
 void display_menu();
 void display_left_to_rigth();
+// delete part
+void delete_from_front();
+void delete_from_end();
 int main()
 {
-    int ch, ch1;
+    int ch, ch1, ch2;
     do
     {
         menu();
@@ -64,6 +67,29 @@ int main()
 
             break;
         case 2:
+            do
+            {
+                delete_menu();
+                printf("\n Enter Your Choice ");
+                scanf("%d", &ch2);
+                switch (ch2)
+                {
+                case 1:
+                    delete_from_front();
+                    break;
+                case 2:
+                    delete_from_end();
+                    break;
+                case 3:
+                    printf("\n Back To The Main Menu");
+                    break;
+                default:
+                    printf("\n Invalide Choice");
+                    break;
+                }
+            } while (ch2 != 3);
+
+        case 3:
             system("cls");
             display();
             break;
@@ -88,6 +114,14 @@ void insert_menu()
     printf("\n ------------- Insert Menu ------------- ");
     printf("\n |    1. Insert On The Begining         |");
     printf("\n |    2. Insert On The Ending           |");
+    printf("\n |    3. Back To Main Menu              |");
+    printf("\n ----------------------------------------");
+}
+void delete_menu()
+{
+    printf("\n ------------- Delete Menu ------------- ");
+    printf("\n |    1. Delete From Begining           |");
+    printf("\n |    2. Delete From End                |");
     printf("\n |    3. Back To Main Menu              |");
     printf("\n ----------------------------------------");
 }
@@ -191,4 +225,42 @@ void display_left_to_rigth()
         printf("  %d  ", temp->data);
         temp = temp->prev;
     }
+}
+void delete_from_front()
+{
+    if (head == NULL)
+    {
+        printf("\n The Link List Is Empty ");
+        return;
+    }
+    temp = head;
+    head = head->next;
+    if (head != NULL)
+    {
+        head->prev = NULL;
+    }
+    free(temp);
+}
+void delete_from_end()
+{
+    if (head==NULL)
+    {
+        printf("\n The Link LIst Empty");
+        return;
+    }
+    if (head==head->next)
+    {
+        free(head);
+        head=NULL;
+    }
+    temp=head;
+    while (temp->next->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    free(temp->next);
+    temp->next=NULL;
+    
+    
+    
 }
