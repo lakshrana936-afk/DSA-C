@@ -25,6 +25,7 @@ void display();
 void display_menu();
 void display_left_to_rigth();
 // delete part
+void delete_menu();
 void delete_from_front();
 void delete_from_end();
 int main()
@@ -75,15 +76,19 @@ int main()
                 switch (ch2)
                 {
                 case 1:
+                    system("cls");
                     delete_from_front();
                     break;
                 case 2:
+                    system("cls");
                     delete_from_end();
                     break;
                 case 3:
+                    system("cls");
                     printf("\n Back To The Main Menu");
                     break;
                 default:
+                    system("cls");
                     printf("\n Invalide Choice");
                     break;
                 }
@@ -104,8 +109,8 @@ void menu()
 {
     printf("\n ------------ MAIN MENU ------------");
     printf("\n |            1. Insert            |");
-    printf("\n |            2. Display           |");
-    printf("\n |            3. Delete            |");
+    printf("\n |            2. Delete            |");
+    printf("\n |            3. Display           |");
     printf("\n |            4. Exit              |");
     printf("\n -----------------------------------");
 }
@@ -239,28 +244,30 @@ void delete_from_front()
     {
         head->prev = NULL;
     }
+    printf("\n The %d Elemant IS Deleted From The Link List", temp->data);
     free(temp);
 }
 void delete_from_end()
 {
-    if (head==NULL)
+    if (head == NULL)
     {
         printf("\n The Link LIst Empty");
         return;
     }
-    if (head==head->next)
+    // this for one node
+    if (head == head->next)
     {
         free(head);
-        head=NULL;
+        head = NULL;
+        return;
     }
-    temp=head;
-    while (temp->next->next!=NULL)
+    temp = head;
+    while (temp->next != NULL)
     {
-        temp=temp->next;
+        temp = temp->next;
     }
-    free(temp->next);
-    temp->next=NULL;
-    
-    
-    
+
+    printf("\n The %d Elemant IS Deleted From The Link List", temp->data);
+    temp->prev->next = NULL;
+    free(temp);
 }
