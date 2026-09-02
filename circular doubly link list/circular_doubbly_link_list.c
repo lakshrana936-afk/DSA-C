@@ -214,7 +214,7 @@ void forwerd_display()
     do
     {
         printf(" %d ", temp->data);
-        temp = temp->next;
+        temp = temp->prev;
     } while (temp->next != head);
 }
 void display_menu()
